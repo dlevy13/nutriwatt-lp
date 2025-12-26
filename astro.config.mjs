@@ -8,12 +8,20 @@ import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
+// Check if we're deploying to Vercel (Vercel sets VERCEL=1 automatically)
+const isVercel = process.env.VERCEL === "1";
+
 export default defineConfig({
   // GitHub Pages configuration
   // Only use base path in production (when building for GitHub Pages)
   // In development, base is undefined so the site works at localhost:4321
-  site: "https://raph13009.github.io",
-  base: import.meta.env.DEV ? undefined : "/nutriwatt",
+  // On Vercel, don't use base path
+  site: isVercel 
+    ? undefined 
+    : "https://raph13009.github.io",
+  base: import.meta.env.DEV || isVercel 
+    ? undefined 
+    : "/nutriwatt",
   // https://docs.astro.build/en/guides/images/#authorizing-remote-images
   image: {
     domains: ["images.unsplash.com"],
