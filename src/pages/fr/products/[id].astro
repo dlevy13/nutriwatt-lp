@@ -85,7 +85,7 @@ const ogTitle = `${product.data.title} | Outils Matériels | ScrewFast`;
         </p>
         {/* Show Strava and Garmin logos for Sport only */}
         {product.id.includes('item-t845') && (
-          <div class="mt-6 flex items-center gap-6">
+          <div class="mt-6 flex items-center justify-center sm:justify-start gap-6">
             <img src={`${cleanBase}partners/strava-logo.avif`} alt="Strava" class="h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" style="display: block;" />
             <img src={`${cleanBase}partners/garmin-logo.svg`} alt="Garmin" class="h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" style="display: block;" />
           </div>
@@ -262,7 +262,7 @@ const ogTitle = `${product.data.title} | Outils Matériels | ScrewFast`;
     <div class="mx-auto mb-20 w-full md:mb-28 2xl:w-4/5">
       {product.id.includes('item-t845') ? (
         /* Integration section for Sport - screens + Strava & Garmin logos */
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-6 justify-items-center md:grid-cols-2 lg:grid-cols-3 md:justify-items-stretch">
           <div class="flex items-center justify-center">
             <img
               src={`${cleanBase}screens/screen2.avif`}
@@ -287,14 +287,14 @@ const ogTitle = `${product.data.title} | Outils Matériels | ScrewFast`;
               style="background: transparent;"
             />
           </div>
-          <div class="flex items-center justify-center bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6">
+          <div class="flex items-center justify-center bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 w-full max-w-[200px] md:max-w-none">
             <img
               src={`${cleanBase}partners/strava-logo.avif`}
               alt="Strava"
               class="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity"
             />
           </div>
-          <div class="flex items-center justify-center bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6">
+          <div class="flex items-center justify-center bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 w-full max-w-[200px] md:max-w-none">
             <img
               src={`${cleanBase}partners/garmin-logo.svg`}
               alt="Garmin"

@@ -42,15 +42,27 @@ const TrueFocus = ({
     if (currentIndex === null || currentIndex === -1) return;
     if (!wordRefs.current[currentIndex] || !containerRef.current) return;
 
-    const parentRect = containerRef.current.getBoundingClientRect();
-    const activeRect = wordRefs.current[currentIndex].getBoundingClientRect();
+    // Use requestAnimationFrame to ensure DOM is fully rendered
+    const updateFocusRect = () => {
+      if (!wordRefs.current[currentIndex] || !containerRef.current) return;
+      
+      const parentRect = containerRef.current.getBoundingClientRect();
+      const activeRect = wordRefs.current[currentIndex].getBoundingClientRect();
 
-    setFocusRect({
-      x: activeRect.left - parentRect.left,
-      y: activeRect.top - parentRect.top,
-      width: activeRect.width,
-      height: activeRect.height
-    });
+      setFocusRect({
+        x: activeRect.left - parentRect.left,
+        y: activeRect.top - parentRect.top,
+        width: activeRect.width,
+        height: activeRect.height
+      });
+    };
+
+    // Small delay to ensure layout is complete, especially in production
+    const timeoutId = setTimeout(() => {
+      requestAnimationFrame(updateFocusRect);
+    }, 50);
+
+    return () => clearTimeout(timeoutId);
   }, [currentIndex, words.length]);
 
   const handleMouseEnter = (index: number) => {
@@ -70,7 +82,13 @@ const TrueFocus = ({
     <div
       className="relative flex gap-2 justify-start items-baseline flex-wrap"
       ref={containerRef}
-      style={{ outline: 'none', userSelect: 'none', paddingBottom: '0.5rem', lineHeight: '1.2' }}
+      style={{ 
+        outline: 'none', 
+        userSelect: 'none', 
+        paddingBottom: '0.5rem', 
+        lineHeight: '1.2',
+        minHeight: '1.2em' // Prevent layout shift
+      }}
     >
       {words.map((word, index) => {
         const isActive = index === currentIndex;
@@ -113,10 +131,11 @@ const TrueFocus = ({
           y: focusRect.y,
           width: focusRect.width,
           height: focusRect.height,
-          opacity: currentIndex >= 0 ? 1 : 0
+          opacity: currentIndex >= 0 && focusRect.width > 0 ? 1 : 0
         }}
         transition={{
-          duration: animationDuration
+          duration: animationDuration,
+          ease: "easeInOut"
         }}
         style={{
           '--border-color': borderColor,
