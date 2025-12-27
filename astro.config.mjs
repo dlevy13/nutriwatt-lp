@@ -12,16 +12,25 @@ import mdx from "@astrojs/mdx";
 // For Vercel and local development, base path is undefined
 const isGitHubPages = process.env.GITHUB_PAGES === "true";
 
+// Determine site URL: GitHub Pages URL, Vercel URL, or placeholder
+let siteUrl;
+if (isGitHubPages) {
+  siteUrl = "https://raph13009.github.io";
+} else if (process.env.VERCEL_URL) {
+  siteUrl = `https://${process.env.VERCEL_URL}`;
+} else {
+  // Use a placeholder for local development (sitemap needs a valid URL)
+  siteUrl = "https://example.com";
+}
+
 export default defineConfig({
   // GitHub Pages configuration
   // Only use base path when GITHUB_PAGES=true is set
   // In development and on Vercel, base is undefined
-  site: isGitHubPages 
-    ? "https://raph13009.github.io"
-    : undefined,
-  base: isGitHubPages 
-    ? "/nutriwatt"
-    : undefined,
+  site: siteUrl,
+  ...(isGitHubPages && {
+    base: "/nutriwatt",
+  }),
   // https://docs.astro.build/en/guides/images/#authorizing-remote-images
   image: {
     domains: ["images.unsplash.com"],
