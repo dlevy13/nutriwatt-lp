@@ -25,7 +25,7 @@ longDescription:
     Nutriwatt se concentre sur l'essentiel : vous aider à mieux comprendre votre alimentation.
     Sans surcharge de fonctionnalités, l'application vous permet d'enregistrer vos repas, de visualiser vos apports nutritionnels et de suivre votre évolution dans le temps.
   btnTitle: "Télécharger Gratuitement"
-  btnURL: "#"
+  btnURL: "/link/app-arm64-v8a-release.apk"
 descriptionList:
   - title: "Enregistrement Facile des Repas"
     subTitle: "Enregistrez rapidement tout ce que vous mangez avec notre interface conviviale. Pas de fonctionnalités compliquées - juste un suivi simple et efficace."

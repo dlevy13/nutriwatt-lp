@@ -25,7 +25,7 @@ longDescription:
     Nutriwatt permet aux sportifs de relier alimentation et entraînement.
     Grâce à la synchronisation avec vos activités, l'application ajuste vos apports nutritionnels pour soutenir vos efforts, améliorer la récupération et accompagner votre progression.
   btnTitle: "Télécharger Gratuitement"
-  btnURL: "#"
+  btnURL: "/link/app-arm64-v8a-release.apk"
 descriptionList:
   - title: "Objectifs sportifs personnalisés"
     subTitle: "Définissez vos objectifs (endurance, perte de poids, maintien, performance) et adaptez votre nutrition à votre pratique sportive."
