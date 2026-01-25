@@ -2,6 +2,7 @@
     "buildCommand": "npm run build",
     "framework": null,
     "installCommand": "npm install",
+    "functions": {},
     "headers": [
       {
         "source": "/(.*)",
