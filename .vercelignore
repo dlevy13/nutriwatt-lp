@@ -1,0 +1,6 @@
+# Ignore Python files - not needed for Astro build
+*.py
+requirements.txt
+README_REMOVE_BACKGROUND.md
+remove_background.py
+remove_background_simple.py
