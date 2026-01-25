@@ -58,7 +58,7 @@ def remove_background(input_path: str, output_path: str = None):
 
 if __name__ == "__main__":
     # Chemin par défaut
-    default_input = "/Users/davidlevy/Documents/David/NutriApp/SiteWeb/nutriwatt-lp/src/images/nutriwatt-logo-with-name.png"
+    default_input = "/Users/raphaellevy/Desktop/nutriwatt-lp/src/images/nutriwatt-logo-with-name.png"
     
     if len(sys.argv) > 1:
         input_path = sys.argv[1]
