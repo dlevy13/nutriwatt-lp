@@ -3,7 +3,7 @@ import sharp from "sharp";
 import ico from "sharp-ico";
 import path from "node:path";
 
-const faviconSrc = path.resolve("src/images/nutriwatt-logo-with-name.png");
+const faviconSrc = path.resolve("src/images/nutriwatt-logo.png");
 
 export const GET: APIRoute = async () => {
 
