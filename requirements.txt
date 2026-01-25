@@ -1,0 +1,3 @@
+rembg[new]
+pillow
+numpy

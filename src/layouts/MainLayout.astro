@@ -3,6 +3,7 @@
 import Meta from "@components/Meta.astro";
 import Navbar from "@components/sections/navbar&footer/Navbar.astro";
 import FooterSection from "@components/sections/navbar&footer/FooterSection.astro";
+import DownloadModal from "@components/ui/modals/DownloadModal.astro";
 import { SITE } from "@data/constants";
 import "@styles/global.css";
 
@@ -68,6 +69,7 @@ interface Props {
       </main>
     </div>
     <FooterSection />
+    <DownloadModal />
     <script>
       // https://preline.co
       import "preline/preline.js";

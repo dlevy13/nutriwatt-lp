@@ -1,12 +1,13 @@
 ---
 import Icon from "@components/ui/icons/Icon.astro";
 // Destructure the properties from Astro.props
-const { title, url, noArrow } = Astro.props;
+const { title, url, noArrow, openDownloadModal = false } = Astro.props;
 // Define TypeScript interface for the properties
 interface Props {
   title?: string;
   url?: string;
   noArrow?: boolean;
+  openDownloadModal?: boolean;
 }
 // Define CSS classes for styling the button
 const baseClasses =
@@ -20,13 +21,23 @@ const ringClasses = "dark:ring-zinc-200";
 ---
 
 <!-- Link styled as a button, with dynamic title, URL, and optional arrow -->
-<a
-  class={`${baseClasses} ${borderClasses} ${bgColorClasses} ${disableClasses} ${fontSizeClasses} ${ringClasses}`}
-  href={url}
-  style="text-align: center;"
->
-  <span class="block text-center w-full">{title}</span>
-  <!-- Display the arrow based on the 'noArrow' property -->
-
-  {noArrow ? null : <Icon name="arrowRight" />}
-</a>
+{openDownloadModal ? (
+  <button
+    type="button"
+    data-hs-overlay="#download-modal"
+    class={`${baseClasses} ${borderClasses} ${bgColorClasses} ${disableClasses} ${fontSizeClasses} ${ringClasses}`}
+    style="text-align: center;"
+  >
+    <span class="block text-center w-full">{title}</span>
+    {noArrow ? null : <Icon name="arrowRight" />}
+  </button>
+) : (
+  <a
+    class={`${baseClasses} ${borderClasses} ${bgColorClasses} ${disableClasses} ${fontSizeClasses} ${ringClasses}`}
+    href={url}
+    style="text-align: center;"
+  >
+    <span class="block text-center w-full">{title}</span>
+    {noArrow ? null : <Icon name="arrowRight" />}
+  </a>
+)}
