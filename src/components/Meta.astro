@@ -1,9 +1,9 @@
 ---
 import { getImage } from "astro:assets";
 import { OG, SEO, SITE } from "@data/constants";
-import nutriwattLogo from "@images/nutriwatt-logo.png";
-// Utiliser le logo Nutriwatt pour les favicons
-const faviconSrc = nutriwattLogo;
+import nutriwattLogoWithName from "@images/nutriwatt-logo-with-name.png";
+// Utiliser le logo Nutriwatt avec nom pour les favicons
+const faviconSrc = nutriwattLogoWithName;
 
 // Default properties for the Meta component. These values are used if props are not provided.
 // 'meta' sets a default description meta tag to describe the page content.
@@ -83,7 +83,7 @@ const faviconPng = await getImage({
 
 // Use Nutriwatt logo for apple touch icon and mobile meta - AGRANDI pour être plus visible
 const appleTouchIcon = await getImage({
-  src: nutriwattLogo,
+  src: nutriwattLogoWithName,
   width: 512,
   height: 512,
   format: "png",
@@ -91,7 +91,7 @@ const appleTouchIcon = await getImage({
 
 // Generate logo for mobile meta tags - AGRANDI pour être plus visible
 const mobileLogo = await getImage({
-  src: nutriwattLogo,
+  src: nutriwattLogoWithName,
   width: 1024,
   height: 1024,
   format: "png",

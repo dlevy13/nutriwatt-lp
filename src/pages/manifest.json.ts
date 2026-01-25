@@ -1,9 +1,9 @@
 import type { APIRoute, ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
-import nutriwattLogo from "@images/nutriwatt-logo.png";
-// Utiliser le logo Nutriwatt pour les icônes
-const icon = nutriwattLogo;
-const maskableIcon = nutriwattLogo;
+import nutriwattLogoWithName from "@images/nutriwatt-logo-with-name.png";
+// Utiliser le logo Nutriwatt avec nom pour les icônes
+const icon = nutriwattLogoWithName;
+const maskableIcon = nutriwattLogoWithName;
 
 interface Favicon {
   purpose: 'any' | 'maskable' | 'monochrome';

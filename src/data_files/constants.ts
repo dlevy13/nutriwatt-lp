@@ -1,5 +1,5 @@
 import ogImageSrc from "@images/social2.png";
-import nutriwattLogo from "@images/nutriwatt-logo.png";
+import nutriwattLogoWithName from "@images/nutriwatt-logo-with-name.png";
 
 
 
@@ -39,7 +39,7 @@ export const OG = {
   title: `${SITE.title}: Health & Nutrition Tracking Apps`,
   description: "Achieve your health and fitness goals with Nutriwatt's mobile nutrition tracking apps. Track meals, calculate nutrients automatically, and get personalized recommendations. Perfect for athletes with Strava integration or anyone starting their health journey.",
   image: ogImageSrc,
-  logo: nutriwattLogo, // Logo simple pour meta tags
+  logo: nutriwattLogoWithName, // Logo avec nom pour meta tags
 };
 
 // Get base path for assets

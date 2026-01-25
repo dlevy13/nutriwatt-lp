@@ -65,8 +65,9 @@ const defaultApplePwaUrl = "https://nutriapp-4ea20.web.app";
             <!-- Bouton Apple -->
             <button
               type="button"
-              class="inline-block transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#3A73C1] focus:ring-offset-2 rounded-lg download-apple-btn"
-              data-download-modal-id={id}
+              data-hs-overlay="#pwa-install-modal"
+              class="inline-block transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#3A73C1] focus:ring-offset-2 rounded-lg"
+              data-close-download-modal={id}
             >
               <!-- Light mode -->
               <img
@@ -202,22 +203,21 @@ const defaultApplePwaUrl = "https://nutriapp-4ea20.web.app";
       }
     });
     
-    // Gérer le clic sur le bouton Apple pour ouvrir le modal PWA
-    document.querySelectorAll('.download-apple-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const downloadModalId = this.getAttribute('data-download-modal-id');
+    // Fermer le modal de choix quand on clique sur le bouton Apple
+    // Le bouton Apple utilise data-hs-overlay="#pwa-install-modal" pour ouvrir le modal PWA
+    // On ferme juste le modal de choix avant
+    document.body.addEventListener('click', function(e) {
+      const target = e.target.closest('button[data-hs-overlay="#pwa-install-modal"]');
+      if (!target) return;
+      
+      // Fermer le modal de choix si le bouton a l'attribut data-close-download-modal
+      const downloadModalId = target.getAttribute('data-close-download-modal');
+      if (downloadModalId) {
         const downloadModal = document.getElementById(downloadModalId);
-        const pwaModal = document.getElementById('pwa-install-modal');
-        
-        if (downloadModal && pwaModal) {
-          // Fermer le modal de choix
+        if (downloadModal) {
           downloadModal.classList.add('hidden');
-          // Ouvrir le modal PWA après un court délai
-          setTimeout(() => {
-            pwaModal.classList.remove('hidden');
-          }, 300);
         }
-      });
-    });
+      }
+    }, false);
   });
 </script>
