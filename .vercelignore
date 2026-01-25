@@ -2,4 +2,4 @@
 *.py
 requirements.txt
 README_REMOVE_BACKGROUND.md
-scripts/
+scripts/python/
