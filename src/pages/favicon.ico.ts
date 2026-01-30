@@ -9,6 +9,7 @@ export const GET: APIRoute = async () => {
 
   // Resize the image to multiple sizes
   const sizes = [16, 32];
+  // Keep sizes limited to small square icons for standard favicon use.
 
   const buffers = await Promise.all(
     sizes.map(async (size) => {
