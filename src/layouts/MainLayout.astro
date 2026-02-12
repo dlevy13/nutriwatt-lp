@@ -51,6 +51,40 @@ interface Props {
         document.documentElement.classList.remove("dark");
       }
     </script>
+
+    {/*
+      Analytics utilitaire.
+      - Remplace G-XXXXXXXXXX par ton ID de mesure Google Analytics 4.
+      - Fournit window.analytics.trackDownload(platform, extra) pour suivre les téléchargements.
+    */}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QCQGNV0KT"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "G-4QCQGNV0KT");
+
+      // Utilitaire global pour les stats
+      window.analytics = {
+        trackDownload(platform, extra = {}) {
+          try {
+            const ua = navigator.userAgent || "";
+            const isMobile = /Mobi|Android|iPhone|iPad/i.test(ua);
+            const osMatch = ua.match(/\(([^)]+)\)/);
+            const osInfo = osMatch ? osMatch[1] : "unknown";
+
+            gtag("event", "download", {
+              platform, // "android" | "ios"
+              device_category: isMobile ? "mobile" : "desktop",
+              os_info: osInfo,
+              ...extra,
+            });
+          } catch (e) {
+            // silencieux en prod
+          }
+        }
+      };
+    </script>
     <script>
       import "@scripts/lenisSmoothScroll.js";
     </script>

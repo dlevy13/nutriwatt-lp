@@ -44,7 +44,7 @@ const defaultApplePwaUrl = "https://nutriapp-4ea20.web.app";
             <a
               href={defaultAndroidUrl}
               download
-              class="inline-block transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#3A73C1] focus:ring-offset-2 rounded-lg"
+              class="inline-block transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#3A73C1] focus:ring-offset-2 rounded-lg download-android-btn"
             >
               <!-- Light mode -->
               <img
@@ -66,7 +66,7 @@ const defaultApplePwaUrl = "https://nutriapp-4ea20.web.app";
             <button
               type="button"
               data-hs-overlay="#pwa-install-modal"
-              class="inline-block transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#3A73C1] focus:ring-offset-2 rounded-lg"
+              class="inline-block transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#3A73C1] focus:ring-offset-2 rounded-lg download-apple-btn"
               data-close-download-modal={id}
             >
               <!-- Light mode -->
@@ -203,21 +203,32 @@ const defaultApplePwaUrl = "https://nutriapp-4ea20.web.app";
       }
     });
     
-    // Fermer le modal de choix quand on clique sur le bouton Apple
-    // Le bouton Apple utilise data-hs-overlay="#pwa-install-modal" pour ouvrir le modal PWA
-    // On ferme juste le modal de choix avant
-    document.body.addEventListener('click', function(e) {
-      const target = e.target.closest('button[data-hs-overlay="#pwa-install-modal"]');
-      if (!target) return;
-      
-      // Fermer le modal de choix si le bouton a l'attribut data-close-download-modal
-      const downloadModalId = target.getAttribute('data-close-download-modal');
-      if (downloadModalId) {
-        const downloadModal = document.getElementById(downloadModalId);
+    // Tracking des téléchargements et gestion Apple dans ce modal
+    document.querySelectorAll('.download-android-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (window.analytics && typeof window.analytics.trackDownload === 'function') {
+          window.analytics.trackDownload('android', { source: 'download_modal' });
+        }
+      });
+    });
+
+    document.querySelectorAll('button.download-apple-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const downloadModalId = this.getAttribute('data-close-download-modal');
+        const downloadModal = downloadModalId ? document.getElementById(downloadModalId) : null;
+        const pwaModal = document.getElementById('pwa-install-modal');
+
         if (downloadModal) {
           downloadModal.classList.add('hidden');
         }
-      }
-    }, false);
+        if (pwaModal) {
+          pwaModal.classList.remove('hidden');
+        }
+
+        if (window.analytics && typeof window.analytics.trackDownload === 'function') {
+          window.analytics.trackDownload('ios', { source: 'download_modal' });
+        }
+      });
+    });
   });
 </script>

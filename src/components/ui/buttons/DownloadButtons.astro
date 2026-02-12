@@ -16,7 +16,7 @@ const defaultApplePwaUrl = "https://nutriapp-4ea20.web.app";
   <a
     href={androidUrl || defaultAndroidUrl}
     download
-    class="inline-block transition-all duration-300 hover:opacity-90 hover:scale-105 active:opacity-80 active:scale-100 focus:outline-none focus:ring-2 focus:ring-[#3A73C1] focus:ring-offset-2 rounded-lg drop-shadow-lg hover:drop-shadow-xl"
+    class="inline-block transition-all duration-300 hover:opacity-90 hover:scale-105 active:opacity-80 active:scale-100 focus:outline-none focus:ring-2 focus:ring-[#3A73C1] focus:ring-offset-2 rounded-lg drop-shadow-lg hover:drop-shadow-xl download-android-btn"
   >
     <!-- Light mode -->
     <img
@@ -38,7 +38,7 @@ const defaultApplePwaUrl = "https://nutriapp-4ea20.web.app";
   <button
     type="button"
     data-hs-overlay="#pwa-install-modal"
-    class="inline-block transition-all duration-300 hover:opacity-90 hover:scale-105 active:opacity-80 active:scale-100 focus:outline-none focus:ring-2 focus:ring-[#3A73C1] focus:ring-offset-2 rounded-lg drop-shadow-lg hover:drop-shadow-xl"
+    class="inline-block transition-all duration-300 hover:opacity-90 hover:scale-105 active:opacity-80 active:scale-100 focus:outline-none focus:ring-2 focus:ring-[#3A73C1] focus:ring-offset-2 rounded-lg drop-shadow-lg hover:drop-shadow-xl download-apple-btn"
   >
     <!-- Light mode -->
     <img
@@ -150,5 +150,22 @@ const defaultApplePwaUrl = "https://nutriapp-4ea20.web.app";
         }
       });
     }
+
+    // Tracking des téléchargements via l'utilitaire global window.analytics
+    document.querySelectorAll('.download-android-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (window.analytics && typeof window.analytics.trackDownload === 'function') {
+          window.analytics.trackDownload('android', { source: 'hero_buttons' });
+        }
+      });
+    });
+
+    document.querySelectorAll('.download-apple-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (window.analytics && typeof window.analytics.trackDownload === 'function') {
+          window.analytics.trackDownload('ios', { source: 'hero_buttons' });
+        }
+      });
+    });
   });
 </script>
