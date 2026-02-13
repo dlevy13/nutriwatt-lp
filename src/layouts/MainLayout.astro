@@ -73,8 +73,9 @@ interface Props {
             const osInfo = osMatch ? osMatch[1] : "unknown";
 
             if (typeof gtag === "function") {
-              gtag("event", "download", {
+              gtag("event", "download_click", {
                 platform, // "android" | "ios"
+                event_category: "engagement",
                 device_category: isMobile ? "mobile" : "desktop",
                 os_info: osInfo,
                 ...extra,
