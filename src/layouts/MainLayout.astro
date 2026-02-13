@@ -52,19 +52,18 @@ interface Props {
       }
     </script>
 
-    {/*
-      Analytics utilitaire.
-      - Remplace G-XXXXXXXXXX par ton ID de mesure Google Analytics 4.
-      - Fournit window.analytics.trackDownload(platform, extra) pour suivre les téléchargements.
-    */}
+    {/* Google tag (gtag.js) */}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QCQGNV0KT"></script>
-    <script is:inline>
+    <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag("js", new Date());
-      gtag("config", "G-4QCQGNV0KT");
+      gtag('js', new Date());
 
-      // Utilitaire global pour les stats
+      gtag('config', 'G-4QCQGNV0KT');
+    </script>
+
+    {/* Utilitaire analytics personnalisé pour les téléchargements */}
+    <script is:inline>
       window.analytics = {
         trackDownload(platform, extra = {}) {
           try {
@@ -73,12 +72,14 @@ interface Props {
             const osMatch = ua.match(/\(([^)]+)\)/);
             const osInfo = osMatch ? osMatch[1] : "unknown";
 
-            gtag("event", "download", {
-              platform, // "android" | "ios"
-              device_category: isMobile ? "mobile" : "desktop",
-              os_info: osInfo,
-              ...extra,
-            });
+            if (typeof gtag === "function") {
+              gtag("event", "download", {
+                platform, // "android" | "ios"
+                device_category: isMobile ? "mobile" : "desktop",
+                os_info: osInfo,
+                ...extra,
+              });
+            }
           } catch (e) {
             // silencieux en prod
           }
